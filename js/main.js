@@ -45,7 +45,7 @@ play.addEventListener("click",
     // Dichiaro e assegno un array a tutte le celle create
     const arraySquare = document.getElementsByClassName('square');
     
-    // Ciclo i valori dell'arrayBomb e per ognuno la confronto con l'array delle celle assegnandogli la classe
+    // Ciclo i valori dell'arrayBomb e per ognuno la confronto con l'array delle celle assegnandogli la classe bomb
     for(let i = 0; i < 16; i++){
 
         // Metto il -1 perchè il conteggio dell'arraySquare parte da 0
@@ -54,6 +54,8 @@ play.addEventListener("click",
         }
 }
 );
+
+
 
 /*************************** SPECIFIC FUNCTIONS for this project *****************************/
 
@@ -68,10 +70,10 @@ function cycleElementsClass(min, max, typeOfGrid, container){
         container.append(newSquare);
         newSquare.append(i);
 
-        // Aggiunto cambio bg color al click (add blue class)
+        // Aggiunto cambio bg color al click (add clicked class)
         newSquare.addEventListener("click",
             function(){
-                this.classList.add("blue");
+                this.classList.add("not_clicked");
             }
         )
     }

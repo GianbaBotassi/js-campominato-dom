@@ -30,6 +30,7 @@ footer{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    color: transparent;
 }
 
 .grid10x10{
@@ -44,8 +45,11 @@ footer{
     width: calc(100% / 7);
     height:calc(100% / 7);
 }
+.square.not_clicked{
+    background-color: #7fffd4;
+}
 
-.blue{
+.good{
     background-color: #007bff;
 }
 .bomb{
