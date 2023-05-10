@@ -19,8 +19,7 @@ const container = document.getElementById('container');
 // Dichiaro e assegno variabile a bottone PLAY nel DOM
 const play = document.getElementById("play");
 
-// Dichiaro e assegno array a tutte le celle create
-const arraySquare = document.getElementsByClassName('square');
+let arraySquare = [];
 
 // Aggiungo click bottone su play per creazione griglia in container
 play.addEventListener("click",
@@ -38,13 +37,14 @@ play.addEventListener("click",
     }else if(lvlDifficulty === "hard"){
         cycleElementsClass(1,49,"grid7x7",container);
     }
-    for(let i = 0; i < 100; i++){
-        if(arraySquare[i].classList.includes('bomb')){
-            console.log("true");
-        }
-    }
+
+    // // Dichiaro e assegno array a tutte le celle create
+    // arraySquare = document.getElementsByClassName('square');
+
+
 }
 )
+
 
 
 
@@ -64,22 +64,26 @@ function cycleElementsClass(min, max, typeOfGrid, container){
         // Richiamo funzione crea elementi con classe
         const newSquare = createElementClass("span","square");
         newSquare.classList.add(typeOfGrid);
-        newSquare.classList.add("start");
         container.append(newSquare);
         newSquare.append(i);
-              
-            for(let j = 0; j < arrayBomb.length; j++) {
-                
-                if(i - 1 === arrayBomb[j]) {
-                    newSquare.classList.add('bomb');
-                }else{
-                    newSquare.classList.add('good');
-
-                }
-            }
+        
         //  Al click tolgo classe start e rivelo cosa c'è sotto
         newSquare.addEventListener("click",
-            () => newSquare.classList.remove('start') 
+            () => {
+                  
+            const punteggio = document.getElementsByClassName('good').length;
+            console.log(punteggio);
+            
+
+            if(arrayBomb.includes(i)){
+                newSquare.classList.add('bomb');
+                
+                alert("hai perso, hai fatto un punteggio pari a " + punteggio);
+
+            }else{
+                newSquare.classList.add('good'); 
+            }
+        } 
         )
     }
 }

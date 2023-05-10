@@ -45,9 +45,6 @@ footer{
     width: calc(100% / 7);
     height:calc(100% / 7);
 }
-#container .start{
-    background-color: #7fffd4;
-}
 
 .good{
     background-color: #007bff;
