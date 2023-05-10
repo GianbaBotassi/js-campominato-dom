@@ -25,7 +25,7 @@ footer{
 }
 
 .square{
-    border: solid black 1px;
+    border: solid white 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +45,7 @@ footer{
     width: calc(100% / 7);
     height:calc(100% / 7);
 }
-.square.not_clicked{
+#container .start{
     background-color: #7fffd4;
 }
 
@@ -55,6 +55,7 @@ footer{
 .bomb{
     background-color: red;
 }
+
 
 
 

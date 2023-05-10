@@ -28,30 +28,14 @@ play.addEventListener("click",
     // Dichiaro e assegno a variabile valore livello nel DOM 
     const lvlDifficulty = document.getElementById('level').value;
 
-    // Dichiaro variabile vuota per le bombe
-    const arrayBomb = [];
-
     if(lvlDifficulty === "easy"){
-        randomNumberArray(16, 1, 100, arrayBomb); 
         cycleElementsClass(1,100,"grid10x10",container);
     }else if (lvlDifficulty === "medium") {
-        randomNumberArray(16, 1, 81, arrayBomb); 
         cycleElementsClass(1,81,"grid9x9",container);
     }else if(lvlDifficulty === "hard"){
-        randomNumberArray(16, 1, 49, arrayBomb); 
         cycleElementsClass(1,49,"grid7x7",container);
     }
 
-    // Dichiaro e assegno un array a tutte le celle create
-    const arraySquare = document.getElementsByClassName('square');
-    
-    // Ciclo i valori dell'arrayBomb e per ognuno la confronto con l'array delle celle assegnandogli la classe bomb
-    for(let i = 0; i < 16; i++){
-
-        // Metto il -1 perchè il conteggio dell'arraySquare parte da 0
-        const bombNumber = arrayBomb[i] - 1;
-        arraySquare[bombNumber].classList.add('bomb');
-        }
 }
 );
 
@@ -59,26 +43,39 @@ play.addEventListener("click",
 
 /*************************** SPECIFIC FUNCTIONS for this project *****************************/
 
-// Cycle element with class and put into container
+// Cicla elementi con classe con condizioni
 function cycleElementsClass(min, max, typeOfGrid, container){
     
+
+    // Dichiaro variabile vuota per le bombe
+    const arrayBomb = [];
+
+    randomNumberArray(16, 1, max, arrayBomb); 
+
     for(let i = min; i <= max; i++){
 
         // Richiamo funzione crea elementi con classe
         const newSquare = createElementClass("span","square");
         newSquare.classList.add(typeOfGrid);
+        newSquare.classList.add("start");
         container.append(newSquare);
         newSquare.append(i);
+              
+            for(let j = 0; j < arrayBomb.length; j++) {
+                
+                if(i - 1 === arrayBomb[j]) {
+                
+                    newSquare.classList.add('bomb');
+                }else{
+                    newSquare.classList.add('good');
 
-        // Aggiunto cambio bg color al click (add clicked class)
-        newSquare.addEventListener("click",
-            function(){
-                this.classList.add("not_clicked");
+                }
             }
+        //  Al click tolgo classe start e rivelo cosa c'è sotto
+        newSquare.addEventListener("click",
+            () => newSquare.classList.remove('start') 
         )
     }
-
-
 }
 
 /*************************** GENERAL FUNCTIONS *****************************/
