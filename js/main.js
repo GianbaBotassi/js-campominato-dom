@@ -11,15 +11,11 @@
 // Quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste.
 
 
-
-
 // Dichiaro e assegno una variabile al container nel DOM
 const container = document.getElementById('container');
 
 // Dichiaro e assegno variabile a bottone PLAY nel DOM
 const play = document.getElementById("play");
-
-let arraySquare = [];
 
 // Aggiungo click bottone su play per creazione griglia in container
 play.addEventListener("click",
@@ -37,28 +33,21 @@ play.addEventListener("click",
     }else if(lvlDifficulty === "hard"){
         cycleElementsClass(1,49,"grid7x7",container);
     }
-
-    // // Dichiaro e assegno array a tutte le celle create
-    // arraySquare = document.getElementsByClassName('square');
-
-
 }
 )
 
-
-
-
 /*************************** SPECIFIC FUNCTIONS for this project *****************************/
 
-// Cicla elementi con classe con condizioni
+// Cicla elementi con classe con condizioni in specifico container e numeri random per le bombe
 function cycleElementsClass(min, max, typeOfGrid, container){
     
-
     // Dichiaro variabile vuota per le bombe
     const arrayBomb = [];
 
-    randomNumberArray(16, 1, max, arrayBomb); 
+    // Ciclo 16 numeri e li inserisco nel container arrayBomb
+    randomNumberArray(16, min, max, arrayBomb); 
 
+    // Ciclo elementi con classe square, tipologia griglia
     for(let i = min; i <= max; i++){
 
         // Richiamo funzione crea elementi con classe
@@ -67,21 +56,23 @@ function cycleElementsClass(min, max, typeOfGrid, container){
         container.append(newSquare);
         newSquare.append(i);
         
-        //  Al click tolgo classe start e rivelo cosa c'è sotto
+        //  Metto eventi in ascolto ad ogni cella per aggiungere classi bomb e good(senza bomba) 
         newSquare.addEventListener("click",
             () => {
                   
             const punteggio = document.getElementsByClassName('good').length;
-            console.log(punteggio);
-            
 
+            // Se arraybomb include quel numero inserisco la bomba in cella
             if(arrayBomb.includes(i)){
                 newSquare.classList.add('bomb');
-                
-                alert("hai perso, hai fatto un punteggio pari a " + punteggio);
-
             }else{
+                // altrimenti classe good
                 newSquare.classList.add('good'); 
+            }
+            
+            // Se la classe combacia al click, allora hai perso (da output punteggio)
+            if(newSquare.className === `square ${typeOfGrid} bomb`){
+                alert("Hai perso, il tuo punteggio è pari a " + punteggio);
             }
         } 
         )
