@@ -19,6 +19,9 @@ const container = document.getElementById('container');
 // Dichiaro e assegno variabile a bottone PLAY nel DOM
 const play = document.getElementById("play");
 
+// Dichiaro e assegno array a tutte le celle create
+const arraySquare = document.getElementsByClassName('square');
+
 // Aggiungo click bottone su play per creazione griglia in container
 play.addEventListener("click",
     () => {
@@ -35,9 +38,13 @@ play.addEventListener("click",
     }else if(lvlDifficulty === "hard"){
         cycleElementsClass(1,49,"grid7x7",container);
     }
-
+    for(let i = 0; i < 100; i++){
+        if(arraySquare[i].classList.includes('bomb')){
+            console.log("true");
+        }
+    }
 }
-);
+)
 
 
 
@@ -64,7 +71,6 @@ function cycleElementsClass(min, max, typeOfGrid, container){
             for(let j = 0; j < arrayBomb.length; j++) {
                 
                 if(i - 1 === arrayBomb[j]) {
-                
                     newSquare.classList.add('bomb');
                 }else{
                     newSquare.classList.add('good');
